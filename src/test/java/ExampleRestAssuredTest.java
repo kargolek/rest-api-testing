@@ -5,8 +5,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.util.Properties;
-
 @RunWith(JUnit4.class)
 public class ExampleRestAssuredTest {
 
@@ -44,9 +42,10 @@ public class ExampleRestAssuredTest {
                 .queryParam("token", System.getenv("trl_token"))
                 .get();
 
-        Assert.assertEquals(200, response.getStatusCode());
-        Assert.assertEquals("application/json; charset=utf-8", response.getHeader("Content-Type"));
-        System.out.println(response.body().print());
-
+        Assert.assertEquals("Example_Name_Board", response.body()
+                .peek()
+                .jsonPath()
+                .getList("name")
+                .get(0));
     }
 }
