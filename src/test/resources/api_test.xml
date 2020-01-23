@@ -1,0 +1,8 @@
+<suite name="Trello Rest API test suite">
+    <test name="Trello Rest API test">
+        <classes>
+            <class name="org.api.test.KeyTokenTest"/>
+            <class name="org.api.test.BoardRestTest"/>
+        </classes>
+    </test>
+</suite>

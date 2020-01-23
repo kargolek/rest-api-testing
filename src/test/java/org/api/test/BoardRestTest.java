@@ -1,10 +1,6 @@
+package org.api.test;
+
 import io.restassured.RestAssured;
-import io.restassured.matcher.ResponseAwareMatcher;
-import io.restassured.response.Response;
-import org.hamcrest.Matcher;
-import org.junit.Before;
-import org.junit.runner.RunWith;
-import org.junit.runners.JUnit4;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

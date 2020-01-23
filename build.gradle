@@ -19,3 +19,9 @@ dependencies {
     testCompile group: 'io.cucumber', name: 'gherkin', version: '9.1.0'
     testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
 }
+
+test {
+    useTestNG() {
+        suites 'src/test/resources/api_test.xml'
+    }
+}
