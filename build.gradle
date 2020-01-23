@@ -1,0 +1,20 @@
+plugins {
+    id 'java'
+}
+
+group 'org.restapi.training'
+version '0.0.1'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile group: 'org.testng', name: 'testng', version: '7.1.0'
+    testCompile group: 'io.rest-assured', name: 'rest-assured', version: '4.1.2'
+    testCompile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.10.1'
+    testCompile group: 'io.cucumber', name: 'gherkin', version: '9.1.0'
+}
