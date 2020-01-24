@@ -3,6 +3,7 @@ package org.api.test;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
+import io.restassured.parsing.Parser;
 import io.restassured.specification.RequestSpecification;
 import org.api.test.pojo.Board;
 import org.testng.annotations.BeforeGroups;
@@ -92,6 +93,34 @@ public class BoardRestTest {
                 .body("desc", is("test description"));
     }
 
+    @Test(groups = "set_baseURI")
+    public void post_board_name_test_api_board_created_error_parsing_body() {
+        RestAssured.registerParser("text/plain", Parser.TEXT);
+        given()
+                .queryParam("", "?")
+                .queryParam("name", "test_api_board_created")
+                .queryParam("defaultLabels", "true")
+                .queryParam("defaultLists", "true")
+                .queryParam("desc", "test description")
+                .queryParam("keepFromSource", "none")
+                .queryParam("prefs_permissionLevel", "private")
+                .queryParam("prefs_voting", "disabled")
+                .queryParam("prefs_comments", "members")
+                .queryParam("prefs_invitations", "members")
+                .queryParam("prefs_selfJoin", "true")
+                .queryParam("prefs_cardCovers", "true")
+                .queryParam("prefs_background", "green")
+                .queryParam("prefs_cardAging", "regular")
+                .queryParam("key", System.getenv("trl_key"))
+                .queryParam("token", System.getenv("trl_token"))
+                .when()
+                .post("boards")
+                .then()
+                .statusCode(415)
+                .contentType("text/plain; charset=utf-8")
+                .body(is("Error parsing body"));
+    }
+
     @Test(groups = "set_baseURI_create_board")
     public void put_board_by_id_new_name() {
         given()
@@ -104,6 +133,21 @@ public class BoardRestTest {
                 .statusCode(200)
                 .contentType("application/json; charset=utf-8")
                 .body("name", is("new_changed_name"));
+    }
+
+    @Test(groups = "set_baseURI_create_board")
+    public void put_board_by_id_new_name_error_id() {
+        RestAssured.registerParser("text/plain", Parser.TEXT);
+        given()
+                .queryParam("name", "new_changed_name")
+                .queryParam("key", System.getenv("trl_key"))
+                .queryParam("token", System.getenv("trl_token"))
+                .when()
+                .put(String.format("boards/%s", "anErrorId"))
+                .then()
+                .statusCode(400)
+                .contentType("text/plain; charset=utf-8")
+                .body(is("invalid id"));
     }
 
 
