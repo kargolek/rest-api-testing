@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
 
+@Test(groups = "baseURI")
 public class KeyTokenTest {
 
     @Test

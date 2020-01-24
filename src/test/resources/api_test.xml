@@ -1,7 +1,17 @@
-<suite name="Trello Rest API test suite">
-    <test name="Trello Rest API test">
+<suite name="Trello Rest API suite">
+    <test name="Validate key and token set as system environment variable">
         <classes>
             <class name="org.api.test.KeyTokenTest"/>
+        </classes>
+    </test>
+    <test name="Trello Rest API test">
+        <groups>
+            <run>
+                <include name="set_baseURI_create_board"/>
+                <include name="set_baseURI"/>
+            </run>
+        </groups>
+        <classes>
             <class name="org.api.test.BoardRestTest"/>
         </classes>
     </test>
