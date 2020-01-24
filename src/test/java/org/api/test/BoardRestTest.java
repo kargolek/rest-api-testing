@@ -6,8 +6,12 @@ import io.restassured.http.Method;
 import io.restassured.parsing.Parser;
 import io.restassured.specification.RequestSpecification;
 import org.api.test.pojo.Board;
+import org.hamcrest.Matcher;
+import org.hamcrest.text.MatchesPattern;
 import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.Test;
+
+import java.util.regex.Pattern;
 
 import static io.restassured.RestAssured.given;;
 import static org.hamcrest.Matchers.*;
@@ -149,6 +153,33 @@ public class BoardRestTest {
                 .contentType("text/plain; charset=utf-8")
                 .body(is("invalid id"));
     }
+
+    @Test(groups = "set_baseURI_create_board")
+    public void get_boards_receive_field() {
+        given()
+                .queryParam("key", System.getenv("trl_key"))
+                .queryParam("token", System.getenv("trl_token"))
+                .when()
+                .get(String.format("boards/%s/name", board.getId()))
+                .then()
+                .statusCode(200)
+                .contentType("application/json; charset=utf-8")
+                .body("_value", is("test_api_board_created"));
+    }
+
+    @Test(groups = "set_baseURI_create_board")
+    public void get_boards_actions_limited_1() {
+        given()
+                .queryParam("key", System.getenv("trl_key"))
+                .queryParam("token", System.getenv("trl_token"))
+                .when()
+                .get(String.format("boards/%s/actions/?limited=1", board.getId()))
+                .then()
+                .statusCode(200)
+                .contentType("application/json; charset=utf-8")
+                .body("id", notNullValue());
+    }
+
 
 
 }
