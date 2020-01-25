@@ -1,28 +1,43 @@
 <suite name="Trello Rest API suite">
     <test name="Validate key and token set as system environment variable">
         <classes>
-            <class name="org.api.test.SystemEnvironmentKeyAndTokenTest"/>
+            <class name="api.test.SystemEnvironmentKeyAndTokenTest"/>
         </classes>
     </test>
     <test name="Trello API Token tests">
-        <groups>
-            <run>
-                <include name="bad_token"/>
-            </run>
-        </groups>
         <classes>
-            <class name="org.api.test.TokensTest"/>
+            <class name="api.test.TokensTest"/>
         </classes>
     </test>
     <test name="Trello Rest API test">
         <groups>
             <run>
-                <include name="set_baseURI_create_board"/>
                 <include name="set_baseURI"/>
             </run>
         </groups>
         <classes>
-            <class name="org.api.test.BoardRestTest"/>
+            <class name="api.test.BoardRestTest"/>
+            <class name="api.test.PluginsTest"/>
+        </classes>
+    </test>
+    <test name="Trello Rest API test - before: create board">
+        <groups>
+            <run>
+                <include name="set_baseURI_create_board"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="api.test.BoardRestTest"/>
+        </classes>
+    </test>
+    <test name="Trello Rest API test - before: remove all boards">
+        <groups>
+            <run>
+                <include name="set_baseURI_remove_boards_all"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="api.test.BoardRestTest"/>
         </classes>
     </test>
 </suite>

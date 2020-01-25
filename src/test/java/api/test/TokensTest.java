@@ -1,7 +1,8 @@
-package org.api.test;
+package api.test;
 
 import io.restassured.RestAssured;
 import org.testng.annotations.BeforeGroups;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
@@ -11,13 +12,13 @@ public class TokensTest {
 
     private String badToken;
 
-    @BeforeGroups(groups = "bad_token")
+    @BeforeMethod()
     public void init(){
         badToken = System.getenv("trl_token").replace("8", "9");
         RestAssured.baseURI = "https://api.trello.com/1";
     }
 
-    @Test(groups = "bad_token")
+    @Test
     public void get_bad_token() {
         given()
                 .queryParam("key", System.getenv("trl_key"))
@@ -29,7 +30,7 @@ public class TokensTest {
                 .body(is("token not found"));
     }
 
-    @Test(groups = "bad_token")
+    @Test
     public void get_correct_token() {
         given()
                 .queryParam("key", System.getenv("trl_key"))

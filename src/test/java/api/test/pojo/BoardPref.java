@@ -1,4 +1,4 @@
-package org.api.test.pojo;
+package api.test.pojo;
 
 public class BoardPref {
 
