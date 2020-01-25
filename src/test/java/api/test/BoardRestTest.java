@@ -280,7 +280,7 @@ public class BoardRestTest {
                 .body("message", is("Can't enable plugin"))
                 .body("error", is("PLUGIN_TOO_MANY_PLUGINS"));
     }
-    //@formatter:off
+    //@formatter:off:
 
 
 }
