@@ -3,3 +3,4 @@
 build
 out
 *Test Results*
+cucumber-html-reports
