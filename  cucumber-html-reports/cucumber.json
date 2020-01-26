@@ -1,0 +1,454 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2020-01-26T15:01:34.852Z",
+        "line": 3,
+        "name": "Retrieving boards list",
+        "description": "",
+        "id": "trello-boards-api-features;retrieving-boards-list",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 2247199000,
+              "status": "passed"
+            },
+            "line": 4,
+            "name": "Create one board name \u0027new name\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027new name\u0027",
+                  "offset": 22
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.createBoard(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 5,
+            "name": "Set base URI \u0027https://api.trello.com/1\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027https://api.trello.com/1\u0027",
+                  "offset": 13
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.setBaseURI(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 6,
+            "name": "Set key and token queries parameters",
+            "match": {
+              "location": "api.cucumber_test.BoardsStepsDefinition.setKeyAndToken()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 503653600,
+              "status": "passed"
+            },
+            "line": 7,
+            "name": "Send get request to endpoint \u0027/members/me/boards\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027/members/me/boards\u0027",
+                  "offset": 29
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.sendRequest(java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 24932500,
+              "status": "passed"
+            },
+            "line": 8,
+            "name": "Status code should be \u0027200\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027200\u0027",
+                  "offset": 22
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.validateResponseCode(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 4987800,
+              "status": "passed"
+            },
+            "line": 9,
+            "name": "Status line should be \u0027HTTP/1.1 200 OK\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027HTTP/1.1 200 OK\u0027",
+                  "offset": 22
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.validateStatusLine(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 532574800,
+              "status": "passed"
+            },
+            "line": 10,
+            "name": "Response body for key \u0027name\u0027 has item \u0027new name\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027name\u0027",
+                  "offset": 22
+                },
+                {
+                  "val": "\u0027new name\u0027",
+                  "offset": 38
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.validateResponseBodyHasItemValue(java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-26T15:01:38.183Z",
+        "line": 12,
+        "name": "Retrieving boards list when boards list is empty",
+        "description": "",
+        "id": "trello-boards-api-features;retrieving-boards-list-when-boards-list-is-empty",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 1924346500,
+              "status": "passed"
+            },
+            "line": 13,
+            "name": "Remove all boards",
+            "match": {
+              "location": "api.cucumber_test.BoardsStepsDefinition.removeBoards()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 995200,
+              "status": "passed"
+            },
+            "line": 14,
+            "name": "Register text plain parser",
+            "match": {
+              "location": "api.cucumber_test.BoardsStepsDefinition.registerTextParser()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 15,
+            "name": "Set base URI \u0027https://api.trello.com/1\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027https://api.trello.com/1\u0027",
+                  "offset": 13
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.setBaseURI(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 16,
+            "name": "Set key and token queries parameters",
+            "match": {
+              "location": "api.cucumber_test.BoardsStepsDefinition.setKeyAndToken()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 336396000,
+              "status": "passed"
+            },
+            "line": 17,
+            "name": "Send get request to endpoint \u0027/members/me/boards\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027/members/me/boards\u0027",
+                  "offset": 29
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.sendRequest(java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 18,
+            "name": "Status code should be \u0027200\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027200\u0027",
+                  "offset": 22
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.validateResponseCode(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 19,
+            "name": "Status line should be \u0027HTTP/1.1 200 OK\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027HTTP/1.1 200 OK\u0027",
+                  "offset": 22
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.validateStatusLine(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 32913000,
+              "status": "passed"
+            },
+            "line": 20,
+            "name": "Response body text \u0027id\u0027 is empty",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027id\u0027",
+                  "offset": 19
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.validateResponseBodyIsEmpty(java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      },
+      {
+        "start_timestamp": "2020-01-26T15:01:40.484Z",
+        "line": 22,
+        "name": "Update board name to update name",
+        "description": "",
+        "id": "trello-boards-api-features;update-board-name-to-update-name",
+        "type": "scenario",
+        "keyword": "Scenario",
+        "steps": [
+          {
+            "result": {
+              "duration": 472540800,
+              "status": "passed"
+            },
+            "line": 23,
+            "name": "Create one board name \u0027new name\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027new name\u0027",
+                  "offset": 22
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.createBoard(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 24,
+            "name": "Set base URI \u0027https://api.trello.com/1\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027https://api.trello.com/1\u0027",
+                  "offset": 13
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.setBaseURI(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 25,
+            "name": "Set base path \u0027/boards\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027/boards\u0027",
+                  "offset": 14
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.setBasePath(java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 26,
+            "name": "Set base path board id",
+            "match": {
+              "location": "api.cucumber_test.BoardsStepsDefinition.setBasePathBoardId()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 27,
+            "name": "Set query parameter \u0027name\u0027 and value \u0027updated name\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027name\u0027",
+                  "offset": 20
+                },
+                {
+                  "val": "\u0027updated name\u0027",
+                  "offset": 37
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.setQueriesParam(java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 28,
+            "name": "Set key and token queries parameters",
+            "match": {
+              "location": "api.cucumber_test.BoardsStepsDefinition.setKeyAndToken()"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 558143300,
+              "status": "passed"
+            },
+            "line": 29,
+            "name": "Send put request",
+            "match": {
+              "location": "api.cucumber_test.BoardsStepsDefinition.sendPutRequest()"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "status": "passed"
+            },
+            "line": 30,
+            "name": "Status code should be \u0027200\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027200\u0027",
+                  "offset": 22
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.validateResponseCode(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 998200,
+              "status": "passed"
+            },
+            "line": 31,
+            "name": "Status line should be \u0027HTTP/1.1 200 OK\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027HTTP/1.1 200 OK\u0027",
+                  "offset": 22
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.validateStatusLine(java.lang.String)"
+            },
+            "keyword": "Then "
+          },
+          {
+            "result": {
+              "duration": 13001400,
+              "status": "passed"
+            },
+            "line": 32,
+            "name": "Response body for key \u0027name\u0027 is \u0027updated name\u0027",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\u0027name\u0027",
+                  "offset": 22
+                },
+                {
+                  "val": "\u0027updated name\u0027",
+                  "offset": 32
+                }
+              ],
+              "location": "api.cucumber_test.BoardsStepsDefinition.validateResponseBodyIsValue(java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ]
+      }
+    ],
+    "name": "Trello boards api features",
+    "description": "",
+    "id": "trello-boards-api-features",
+    "keyword": "Feature",
+    "uri": "file:src/test/resources/board_test.feature",
+    "tags": []
+  }
+]
