@@ -43,7 +43,7 @@ task cucumber() {
 
 test {
     useTestNG() {
-        suites 'src/test/resources/api_test.xml'
+        /*suites 'src/test/resources/api_test.xml'*/
         suites 'src/test/resources/cucumber.xml'
     }
 }

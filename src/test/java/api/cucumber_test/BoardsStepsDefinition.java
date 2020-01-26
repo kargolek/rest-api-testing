@@ -11,20 +11,26 @@ import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.Matchers.*;
 
 public class BoardsStepsDefinition {
 
     public Response response;
     public RequestSpecification request = given();
     public Board board;
+    public String tempPath = "";
 
     @Given("Create one board name {string}")
     public void createBoard(String name){
         board = new BoardActions().createBoard(name);
     }
 
-    @Given("Register text/plain parser")
+    @Given("Remove all boards")
+    public void removeBoards(){
+        new BoardActions().removeBoardsAll();
+    }
+
+    @Given("Register text plain parser")
     public void registerTextParser(){
         RestAssured.registerParser("text/plain", Parser.TEXT);
     }
@@ -32,6 +38,16 @@ public class BoardsStepsDefinition {
     @Given("Set base URI {string}")
     public void setBaseURI(String arg0) {
         request.baseUri(arg0);
+    }
+
+    @Given("Set base path {string}")
+    public void setBasePath(String arg0) {
+        tempPath = tempPath + arg0;
+    }
+
+    @Given("Set base path board id")
+    public void setBasePathBoardId() {
+        tempPath = tempPath + "/" + board.getId();
     }
 
     @Given("Set key and token queries parameters")
@@ -54,6 +70,13 @@ public class BoardsStepsDefinition {
     public void sendRequest(String arg0) {
         response = request.log().all()
                 .get(arg0);
+        response.then().log().all();
+    }
+
+    @When("Send put request")
+    public void sendPutRequest(){
+        response = request.log().all()
+                .put(tempPath);
         response.then().log().all();
     }
 
@@ -92,5 +115,9 @@ public class BoardsStepsDefinition {
         response.then().body(is(text));
     }
 
+    @Then("Response body text {string} is empty")
+    public void validateResponseBodyIsEmpty(String key){
+        response.then().body(key, empty());
+    }
 
 }
