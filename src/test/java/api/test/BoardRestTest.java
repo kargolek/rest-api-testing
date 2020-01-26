@@ -1,18 +1,21 @@
 package api.test;
 
 import api.actions.BoardActions;
+import api.actions.CardActions;
+import api.actions.ListActions;
 import api.test.pojo.Board;
+import api.test.pojo.Card;
+import api.test.pojo.ListBoard;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static io.restassured.RestAssured.expect;
+import java.util.List;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
-
-;
 
 public class BoardRestTest {
 
@@ -24,6 +27,8 @@ public class BoardRestTest {
     private String idVotingBoardPlugin = "55a5d917446f517774210013";
     private Board board;
     private BoardActions boardActions = new BoardActions();
+    private ListActions listActions = new ListActions();
+    private CardActions cardActions = new CardActions();
 
     @BeforeMethod(groups = baseGroup)
     public void init() {
@@ -32,9 +37,11 @@ public class BoardRestTest {
     }
 
     @BeforeMethod(groups = createBoardGroup)
-    public void post_board_request() throws InterruptedException {
+    public void post_board_request() {
         System.out.println("CREATE BOARDS");
         board = boardActions.createBoard();
+        List<ListBoard> listList = boardActions.getBoardLists(board.getId());
+        Card card = cardActions.createCard("NEW_TEST_CARD", listList.get(0).getId());
     }
 
     @BeforeMethod(groups = removeBoardsAllGroup)
@@ -147,6 +154,67 @@ public class BoardRestTest {
                 .statusCode(200)
                 .contentType("application/json; charset=utf-8")
                 .body("id", notNullValue());
+    }
+    //@formatter:on
+
+    //@formatter:off
+    @Test(groups = createBoardGroup)
+    public void get_board_plugins() {
+        given()
+                .queryParam("key", System.getenv("trl_key"))
+                .queryParam("token", System.getenv("trl_token"))
+        .when()
+                .log().all()
+                .get("/boards/" + board.getId() + "/boardPlugins")
+        .then()
+                .log().all()
+                .statusLine(statusLine200)
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("id", hasItem(board.getId()))
+                .body("idBoard", hasItem(board.getId()))
+                .body("idPlugin", anything());
+    }
+    //@formatter:on
+
+    //@formatter:off
+    @Test(groups = createBoardGroup)
+    public void get_board_plugins_error_board_id() {
+        given()
+                .param("fields", "id")
+                .param("boardStars", "mine")
+                .queryParam("key", System.getenv("trl_key"))
+                .queryParam("token", System.getenv("trl_token"))
+        .when()
+                .log().all()
+                .get("/boards/" + board.getId())
+        .then()
+                .log().all()
+                .statusLine(statusLine200)
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("id", is(board.getId()))
+                .body("boardStars", empty());
+    }
+    //@formatter:on
+    //@formatter:off
+    @Test(groups = createBoardGroup)
+    public void get_board_cards_limit_one() {
+        given()
+                .param("limit", "2")
+                .param("fields", "name")
+                .queryParam("key", System.getenv("trl_key"))
+                .queryParam("token", System.getenv("trl_token"))
+        .when()
+                .log().all()
+                .get("/boards/" + board.getId() + "/cards/")
+        .then()
+                .log().all()
+                .statusLine(statusLine200)
+                .statusCode(200)
+                .contentType(ContentType.JSON)
+                .body("id", anything())
+                .body("name", hasItem("NEW_TEST_CARD"));
     }
     //@formatter:on
     //@formatter:off

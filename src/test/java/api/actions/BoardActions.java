@@ -1,11 +1,11 @@
 package api.actions;
 
 import api.test.pojo.Board;
+import api.test.pojo.ListBoard;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
-import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import java.util.List;
@@ -42,6 +42,14 @@ public class BoardActions {
                 .queryParam("key", System.getenv("trl_key"))
                 .queryParam("token", System.getenv("trl_token"));
         return requestSpecification.request(Method.POST, "boards").as(Board.class);
+    }
+
+    public List<ListBoard> getBoardLists(String idBoard){
+        RestAssured.baseURI = "https://api.trello.com/1";
+        RequestSpecification requestSpecification = given()
+                .queryParam("key", System.getenv("trl_key"))
+                .queryParam("token", System.getenv("trl_token"));
+        return requestSpecification.request(Method.GET, "/boards/" + idBoard + "/lists").as(new TypeRef<List<ListBoard>>(){});
     }
 
     private List<Map<String, Object>> getBoardsData(){
