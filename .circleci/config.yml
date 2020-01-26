@@ -49,3 +49,6 @@ jobs:
       - store_artifacts:
           path: build/reports/tests
           when: always
+      - store_artifacts:
+          path: cucumber-html-reports
+          when: always
