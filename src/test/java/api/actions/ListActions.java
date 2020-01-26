@@ -1,6 +1,6 @@
 package api.actions;
 
-import api.test.pojo.Card;
+import api.pojo.Card;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.Method;
