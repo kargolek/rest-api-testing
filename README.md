@@ -6,8 +6,9 @@ Project was created only for learn purpose. Below main technologies were used:
 * [REST Assured](http://rest-assured.io/)
 * [Cucumber](https://cucumber.io/docs/)
 * [TestNG](https://testng.org/doc/documentation-main.html)
+* [CircleCI](https://circleci.com/)
 
-and the others...
+and other...
 
 If you want check out how it works, generate Trello API key and token for an account:
 [LINK](https://developers.trello.com/reference#api-key-tokens)
