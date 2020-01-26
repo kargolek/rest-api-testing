@@ -1,5 +1,5 @@
 
-package api.test.pojo;
+package api.pojo;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,0 +1,7 @@
+<suite name="Trello Rest API suite">
+    <test name="Cucumber test">
+        <classes>
+            <class name="api.cucumber_test.CucumberRunner"/>
+        </classes>
+    </test>
+</suite>

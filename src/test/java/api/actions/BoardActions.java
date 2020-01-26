@@ -1,7 +1,7 @@
 package api.actions;
 
-import api.test.pojo.Board;
-import api.test.pojo.ListBoard;
+import api.pojo.Board;
+import api.pojo.ListBoard;
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
@@ -27,6 +27,29 @@ public class BoardActions {
                 .contentType(ContentType.TEXT)
                 .queryParam("", "?")
                 .queryParam("name", "test_api_board_created")
+                .queryParam("defaultLabels", "true")
+                .queryParam("defaultLists", "true")
+                .queryParam("desc", "test description")
+                .queryParam("keepFromSource", "none")
+                .queryParam("prefs_permissionLevel", "private")
+                .queryParam("prefs_voting", "disabled")
+                .queryParam("prefs_comments", "members")
+                .queryParam("prefs_invitations", "members")
+                .queryParam("prefs_selfJoin", "true")
+                .queryParam("prefs_cardCovers", "true")
+                .queryParam("prefs_background", "green")
+                .queryParam("prefs_cardAging", "regular")
+                .queryParam("key", System.getenv("trl_key"))
+                .queryParam("token", System.getenv("trl_token"));
+        return requestSpecification.request(Method.POST, "boards").as(Board.class);
+    }
+
+    public Board createBoard(String boardName){
+        RestAssured.baseURI = "https://api.trello.com/1";
+        RequestSpecification requestSpecification = given()
+                .contentType(ContentType.TEXT)
+                .queryParam("", "?")
+                .queryParam("name", boardName)
                 .queryParam("defaultLabels", "true")
                 .queryParam("defaultLists", "true")
                 .queryParam("desc", "test description")

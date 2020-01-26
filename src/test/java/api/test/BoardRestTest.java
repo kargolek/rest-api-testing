@@ -3,9 +3,9 @@ package api.test;
 import api.actions.BoardActions;
 import api.actions.CardActions;
 import api.actions.ListActions;
-import api.test.pojo.Board;
-import api.test.pojo.Card;
-import api.test.pojo.ListBoard;
+import api.pojo.Board;
+import api.pojo.Card;
+import api.pojo.ListBoard;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.parsing.Parser;
@@ -63,7 +63,7 @@ public class BoardRestTest {
                 .queryParam("token", System.getenv("trl_token"))
         .when()
                 .log().all()
-                .get("members/me/boards")
+                .get("/members/me/boards")
         .then()
                 .log().all()
                 .statusCode(200)
