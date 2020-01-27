@@ -114,21 +114,19 @@ Feature: Trello boards api features
     And Content type should be 'application/json; charset=utf-8'
     And Response body key "name" is "New card added"
 
-    #TODO
-  @CreateBoard @CreateCardRandomName @CreateCard
-  Scenario: Get checklist
+  @CreateBoard @CreateCardRandomName @CreateChecklist
+  Scenario: Get checklists from board
     Given Set base URI 'https://api.trello.com/1'
     Given Set base path '/boards'
     Given Set base path board id
-    Given Set base path '/cards'
+    Given Set base path '/checklists'
     Given Set base path card id
     Given Set key and token
     When Send get request
     Then Status code should be 200
     And Status line should be 'HTTP/1.1 200 OK'
     And Content type should be 'application/json; charset=utf-8'
-    And Response body key "name" is "New card added"
-    
+    And Response body key "name" is "Checklist test"
 
   #PUT
   @CreateBoard
