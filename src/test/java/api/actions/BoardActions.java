@@ -7,6 +7,7 @@ import io.restassured.common.mapper.TypeRef;
 import io.restassured.http.ContentType;
 import io.restassured.http.Method;
 import io.restassured.specification.RequestSpecification;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -26,7 +27,7 @@ public class BoardActions {
         RequestSpecification requestSpecification = given()
                 .contentType(ContentType.TEXT)
                 .queryParam("", "?")
-                .queryParam("name", "test_api_board_created")
+                .queryParam("name", RandomStringUtils.randomAlphabetic(10))
                 .queryParam("defaultLabels", "true")
                 .queryParam("defaultLists", "true")
                 .queryParam("desc", "test description")

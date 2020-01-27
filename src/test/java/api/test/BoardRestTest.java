@@ -39,7 +39,7 @@ public class BoardRestTest {
     @BeforeMethod(groups = createBoardGroup)
     public void post_board_request() {
         System.out.println("CREATE BOARDS");
-        board = boardActions.createBoard();
+        board = boardActions.createBoard("test_api_board_created");
         List<ListBoard> listList = boardActions.getBoardLists(board.getId());
         Card card = cardActions.createCard("NEW_TEST_CARD", listList.get(0).getId());
     }
@@ -119,6 +119,7 @@ public class BoardRestTest {
                 .put(String.format("boards/%s", "anErrorId"))
         .then()
                 .log().all()
+                .statusLine("HTTP/1.1 400 Bad Request")
                 .statusCode(400)
                 .contentType("text/plain; charset=utf-8")
                 .body(is("invalid id"));
@@ -135,6 +136,7 @@ public class BoardRestTest {
                 .get(String.format("boards/%s/name", board.getId()))
         .then()
                 .log().all()
+                .statusLine("HTTP/1.1 200 OK")
                 .statusCode(200)
                 .contentType("application/json; charset=utf-8")
                 .body("_value", is("test_api_board_created"));
@@ -142,18 +144,19 @@ public class BoardRestTest {
     //@formatter:on
     //@formatter:off
     @Test(groups = createBoardGroup)
-    public void get_boards_actions_limited_1() {
+    public void get_boards_actions_limited_2() {
         given()
                 .queryParam("key", System.getenv("trl_key"))
                 .queryParam("token", System.getenv("trl_token"))
         .when()
                 .log().all()
-                .get(String.format("boards/%s/actions/?limited=1", board.getId()))
+                .get(String.format("boards/%s/actions/?limit=2", board.getId()))
         .then()
                 .log().all()
+                .statusLine("HTTP/1.1 200 OK")
                 .statusCode(200)
                 .contentType("application/json; charset=utf-8")
-                .body("id", notNullValue());
+                .body("id", hasSize(2));
     }
     //@formatter:on
 
@@ -179,7 +182,7 @@ public class BoardRestTest {
 
     //@formatter:off
     @Test(groups = createBoardGroup)
-    public void get_board_plugins_error_board_id() {
+    public void get_board_boardsStar_response_for_field_id() {
         given()
                 .param("fields", "id")
                 .param("boardStars", "mine")
