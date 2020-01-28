@@ -121,7 +121,7 @@ Feature: Trello boards api features
     And Response body key "name" is "New card added"
 
   @CreateBoard
-  Scenario: Get boards check
+  Scenario: Get boards all of checklist available
     Given Create a card with name "Card"
     Given Create a checklist with name "New checklist" on the card
     Given Set base URI 'https://api.trello.com/1'
@@ -134,6 +134,22 @@ Feature: Trello boards api features
     And Status line should be 'HTTP/1.1 200 OK'
     And Content type should be 'application/json; charset=utf-8'
     And Response body key "name" has item "New checklist"
+
+  @CreateBoard
+  Scenario: Get custom fields from board
+    Given Enable custom field on board
+    Given Create custom field dropdown list on board
+    Given Set base URI 'https://api.trello.com/1'
+    Given Set base path "/boards"
+    Given Set base path board id
+    Given Set base path '/customFields'
+    Given Set key and token
+    When Send get request
+    Then Status code should be 200
+    And Status line should be 'HTTP/1.1 200 OK'
+    And Content type should be 'application/json; charset=utf-8'
+    And Response body key "name" has item "My dropdown list"
+    And Response body key "options.value.text[0]" has item "First"
 
   @CreateBoard
   Scenario: Update board name to update name

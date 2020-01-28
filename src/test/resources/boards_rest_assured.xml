@@ -1,12 +1,12 @@
 <suite name="Trello Rest API suite">
     <test name="Validate key and token set as system environment variable">
         <classes>
-            <class name="api.test.SystemEnvironmentKeyAndTokenTest"/>
+            <class name="api.rest_assured_test.SystemEnvironmentKeyAndTokenTest"/>
         </classes>
     </test>
     <test name="Trello API Token tests">
         <classes>
-            <class name="api.test.TokensTest"/>
+            <class name="api.rest_assured_test.TokensTest"/>
         </classes>
     </test>
     <test name="Trello Rest API test">
@@ -16,8 +16,8 @@
             </run>
         </groups>
         <classes>
-            <class name="api.test.BoardRestTest"/>
-            <class name="api.test.PluginsTest"/>
+            <class name="api.rest_assured_test.BoardRestTest"/>
+            <class name="api.rest_assured_test.PluginsTest"/>
         </classes>
     </test>
     <test name="Trello Rest API test - before: create board">
@@ -27,7 +27,7 @@
             </run>
         </groups>
         <classes>
-            <class name="api.test.BoardRestTest"/>
+            <class name="api.rest_assured_test.BoardRestTest"/>
         </classes>
     </test>
     <test name="Trello Rest API test - before: remove all boards">
@@ -37,7 +37,7 @@
             </run>
         </groups>
         <classes>
-            <class name="api.test.BoardRestTest"/>
+            <class name="api.rest_assured_test.BoardRestTest"/>
         </classes>
     </test>
 </suite>

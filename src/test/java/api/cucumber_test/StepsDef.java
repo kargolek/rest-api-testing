@@ -6,6 +6,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.mapper.ObjectMapperType;
 import io.restassured.parsing.Parser;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -27,6 +28,11 @@ public class StepsDef {
     @Given("Set request content type text")
     public void setContentTypeText() {
         request.contentType(ContentType.TEXT);
+    }
+
+    @Given("Set request content type json")
+    public void setContentTypeJson() {
+        request.contentType(ContentType.JSON);
     }
 
     @Given("Set base URI {string}")
@@ -53,6 +59,11 @@ public class StepsDef {
     public void setKeyAndToken() {
         request.queryParam("key", System.getenv("trl_key"));
         request.queryParam("token", System.getenv("trl_token"));
+    }
+
+    @Given("Set request json body")
+    public void setRequestBodyJson(){
+        request.body(DataShared.getInstance().getPostObject(), ObjectMapperType.JACKSON_2);
     }
 
     @When("Send get request to endpoint {string}")
