@@ -74,8 +74,11 @@ Feature: Trello boards api features
     And Content type should be 'application/json; charset=utf-8'
     And Response body key "boardStars" is empty
 
-  @CreateBoard @CreateCard
+  @CreateBoard
   Scenario: Get available cards on the board
+    Given Create a card with name "New card added"
+    Given Create a card with name "Other card"
+    Given Create a card with name "Another card"
     Given Set base URI 'https://api.trello.com/1'
     Given Set base path '/boards'
     Given Set base path board id
@@ -87,8 +90,9 @@ Feature: Trello boards api features
     And Content type should be 'application/json; charset=utf-8'
     And Response body key "name" has item "New card added"
 
-  @CreateBoard @CreateCard
+  @CreateBoard
   Scenario: Get only closed card on the board
+    Given Create a card with name "New name"
     Given Set base URI 'https://api.trello.com/1'
     Given Set base path '/boards'
     Given Set base path board id
@@ -100,8 +104,10 @@ Feature: Trello boards api features
     And Content type should be 'application/json; charset=utf-8'
     And Response body key "name" is empty
 
-  @CreateBoard @CreateCardRandomName @CreateCard
+  @CreateBoard
   Scenario: Get card from the board by card id
+    Given Create a card with name "Previous card"
+    Given Create a card with name "New card added"
     Given Set base URI 'https://api.trello.com/1'
     Given Set base path '/boards'
     Given Set base path board id
@@ -114,21 +120,21 @@ Feature: Trello boards api features
     And Content type should be 'application/json; charset=utf-8'
     And Response body key "name" is "New card added"
 
-  @CreateBoard @CreateCardRandomName @CreateChecklist
-  Scenario: Get checklists from board
+  @CreateBoard
+  Scenario: Get boards check
+    Given Create a card with name "Card"
+    Given Create a checklist with name "New checklist" on the card
     Given Set base URI 'https://api.trello.com/1'
     Given Set base path '/boards'
     Given Set base path board id
     Given Set base path '/checklists'
-    Given Set base path card id
     Given Set key and token
     When Send get request
     Then Status code should be 200
     And Status line should be 'HTTP/1.1 200 OK'
     And Content type should be 'application/json; charset=utf-8'
-    And Response body key "name" is "Checklist test"
+    And Response body key "name" has item "New checklist"
 
-  #PUT
   @CreateBoard
   Scenario: Update board name to update name
     Given Set base URI 'https://api.trello.com/1'

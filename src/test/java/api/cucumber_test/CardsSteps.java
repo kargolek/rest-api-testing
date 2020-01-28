@@ -10,34 +10,19 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 public class CardsSteps {
 
-    private DataShared dataShared = DataShared.getInstance();
-
+    DataShared dataShared = DataShared.getInstance();
     private BoardActions boardActions = new BoardActions();
     private CardActions cardActions = new CardActions();
 
-    @Before("@CreateCard")
-    public void createCard() {
-        Card card = cardActions.createCard("New card added",
-                boardActions.getBoardLists(dataShared.getBoard().getId()).get(0).getId());
+    @Given("Create a card with name {string}" )
+    public void createCard(String name) {
+        Card card = cardActions.createCard(name, boardActions.getBoardLists(dataShared.getBoard().getId()).get(0).getId());
         dataShared.setCard(card);
     }
 
-    @Before("@CreateCardRandomName")
-    public void createCardRandomName() {
-        Card card = cardActions.createCard(RandomStringUtils.randomAlphabetic(20),
-                boardActions.getBoardLists(dataShared.getBoard().getId()).get(0).getId());
-        dataShared.setCard(card);
-    }
-
-    @Before("@CreateChecklist")
-    public void createChecklist() {
-        Checklist checklist = cardActions.createChecklist("Checklist test", dataShared.getCard().getId());
-        dataShared.setChecklist(checklist);
-    }
-
-    @Before("@CreateChecklistRandomName")
-    public void createChecklistRandomName() {
-        Checklist checklist = cardActions.createChecklist(RandomStringUtils.randomAlphabetic(20), dataShared.getCard().getId());
+    @Given("Create a checklist with name {string} on the card")
+    public void createChecklist(String name) {
+        Checklist checklist = cardActions.createChecklist(name, dataShared.getCard().getId());
         dataShared.setChecklist(checklist);
     }
 
