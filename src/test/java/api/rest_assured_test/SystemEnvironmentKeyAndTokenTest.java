@@ -1,4 +1,4 @@
-package api.test;
+package api.rest_assured_test;
 
 import org.testng.annotations.Test;
 

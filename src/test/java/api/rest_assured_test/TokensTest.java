@@ -1,7 +1,6 @@
-package api.test;
+package api.rest_assured_test;
 
 import io.restassured.RestAssured;
-import org.testng.annotations.BeforeGroups;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

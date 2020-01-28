@@ -1,4 +1,4 @@
-package api.test;
+package api.rest_assured_test;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;

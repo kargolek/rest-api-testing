@@ -1,4 +1,4 @@
-package api.test;
+package api.rest_assured_test;
 
 import api.actions.BoardActions;
 import api.actions.CardActions;
@@ -8,6 +8,7 @@ import api.pojo.Card;
 import api.pojo.ListBoard;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.mapper.ObjectMapperType;
 import io.restassured.parsing.Parser;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -262,6 +263,7 @@ public class BoardRestTest {
                 .queryParam("token", System.getenv("trl_token"))
         .when()
                 .log().all()
+                .body(new String(""), ObjectMapperType.JACKSON_2)
                 .post("/boards")
         .then()
                 .log().all()
