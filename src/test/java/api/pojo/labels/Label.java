@@ -1,5 +1,4 @@
-
-package api.pojo;
+package api.pojo.labels;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "id",
-    "idBoard",
-    "name",
-    "color"
+        "id",
+        "idBoard",
+        "name",
+        "color"
 })
 public class Label {
 
@@ -29,6 +28,17 @@ public class Label {
     private String color;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<>();
+
+    public Label() {
+    }
+
+    public Label(String id, String idBoard, String name, String color) {
+        super();
+        this.id = id;
+        this.idBoard = idBoard;
+        this.name = name;
+        this.color = color;
+    }
 
     @JsonProperty("id")
     public String getId() {

@@ -5,10 +5,9 @@ import api.actions.CardActions;
 import api.actions.ListActions;
 import api.pojo.Board;
 import api.pojo.Card;
-import api.pojo.ListBoard;
+import api.pojo.lists.BoardList;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.mapper.ObjectMapperType;
 import io.restassured.parsing.Parser;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -41,7 +40,7 @@ public class BoardRestTest {
     public void post_board_request() {
         System.out.println("CREATE BOARDS");
         board = boardActions.createBoard("test_api_board_created");
-        List<ListBoard> listList = boardActions.getBoardLists(board.getId());
+        List<BoardList> listList = boardActions.getBoardLists(board.getId());
         Card card = cardActions.createCard("NEW_TEST_CARD", listList.get(0).getId());
     }
 
@@ -263,7 +262,6 @@ public class BoardRestTest {
                 .queryParam("token", System.getenv("trl_token"))
         .when()
                 .log().all()
-                .body(new String(""), ObjectMapperType.JACKSON_2)
                 .post("/boards")
         .then()
                 .log().all()

@@ -4,9 +4,7 @@ import api.actions.BoardActions;
 import api.actions.CardActions;
 import api.pojo.Card;
 import api.pojo.Checklist;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
-import org.apache.commons.lang3.RandomStringUtils;
 
 public class CardsSteps {
 

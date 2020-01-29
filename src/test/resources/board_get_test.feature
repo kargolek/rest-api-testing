@@ -1,6 +1,5 @@
-Feature: Trello boards api features
+Feature: Trello get boards api features
 
-  #GET
   Scenario: Retrieving boards list
     Given Create one board name 'new name'
     Given Set base URI 'https://api.trello.com/1'
@@ -152,30 +151,91 @@ Feature: Trello boards api features
     And Response body key "options.value.text[0]" has item "First"
 
   @CreateBoard
-  Scenario: Update board name to update name
+  Scenario: Get all labels exist on the board
+    Given Create label on board: name "Label of test", color "green"
     Given Set base URI 'https://api.trello.com/1'
-    Given Set base path '/boards'
+    Given Set base path "/boards"
     Given Set base path board id
-    Given Set query parameter 'name' and value 'updated name'
+    Given Set base path '/labels'
     Given Set key and token
-    When Send put request
+    When Send get request
     Then Status code should be 200
-    And Content type should be 'application/json; charset=utf-8'
     And Status line should be 'HTTP/1.1 200 OK'
-    And Response body key 'name' is 'updated name'
+    And Content type should be 'application/json; charset=utf-8'
+    And Response body key "name" has item "Label of test"
+    And Response body key "color" has item "green"
 
-  @CreateBoard @RegisterTextParser
-  Scenario: Make actions on the board when give wrong board id
+  @CreateBoard
+  Scenario: Get all lists exist on the board
     Given Set base URI 'https://api.trello.com/1'
-    Given Set base path '/boards'
-    Given Set base path '/anErrorId'
-    Given Set query parameter 'name' and value 'updated name'
+    Given Set base path "/boards"
+    Given Set base path board id
+    Given Set base path '/lists'
     Given Set key and token
-    When Send put request
-    Then Status code should be 400
-    And Status line should be 'HTTP/1.1 400 Bad Request'
-    And Content type should be 'text/plain; charset=utf-8'
-    And Response body text is 'invalid id'
+    When Send get request
+    Then Status code should be 200
+    And Status line should be 'HTTP/1.1 200 OK'
+    And Content type should be 'application/json; charset=utf-8'
+    And Response body key "name" has size 3
+
+  @CreateBoard
+  Scenario: Get board's closed (archived) lists
+    Given Set one board list as closed
+    Given Set base URI 'https://api.trello.com/1'
+    Given Set base path "/boards"
+    Given Set base path board id
+    Given Set base path '/lists/closed'
+    Given Set key and token
+    When Send get request
+    Then Status code should be 200
+    And Status line should be 'HTTP/1.1 200 OK'
+    And Content type should be 'application/json; charset=utf-8'
+    And Response body key "name" has size 1
+
+  @CreateBoard
+  Scenario: Get the members for a board
+    Given Set base URI 'https://api.trello.com/1'
+    Given Set base path "/boards"
+    Given Set base path board id
+    Given Set base path '/members'
+    Given Set key and token
+    When Send get request
+    Then Status code should be 200
+    And Status line should be 'HTTP/1.1 200 OK'
+    And Content type should be 'application/json; charset=utf-8'
+    #Full name and user name for trello account is required for pass this test
+    And Response body key "fullName" has item "trelloautoapitest"
+    And Response body key "username" has item "userautoapitest"
+
+  @CreateBoard
+  Scenario: Get information about the memberships users have to the board
+    Given Set base URI 'https://api.trello.com/1'
+    Given Set base path "/boards"
+    Given Set base path board id
+    Given Set base path '/memberships'
+    Given Set key and token
+    When Send get request
+    Then Status code should be 200
+    And Status line should be 'HTTP/1.1 200 OK'
+    And Content type should be 'application/json; charset=utf-8'
+    And Response body key "memberType" has item "admin"
+
+  @CreateBoard
+  Scenario: Get information about the Power-Ups for a board
+    Given Set base URI 'https://api.trello.com/1'
+    Given Set base path "/boards"
+    Given Set base path board id
+    Given Set base path '/plugins'
+    Given Set key and token
+    When Send get request
+    Then Status code should be 200
+    And Status line should be 'HTTP/1.1 200 OK'
+    And Content type should be 'application/json; charset=utf-8'
+    And Response body key "author" has item "Trello Inc"
+    And Response body key 'name' has item 'Butler'
+
+    #PUT
+
 
   #POST
   @CreateBoard

@@ -1,12 +1,9 @@
 package api.cucumber_test;
 
-import api.pojo.Board;
-import api.pojo.Card;
-import api.pojo.Checklist;
-import api.pojo.ListBoard;
-import api.pojo.custom_fields_body.CustomFieldBody;
-
-import java.util.List;
+import api.pojo.*;
+import api.pojo.labels.Label;
+import api.pojo.lists.BoardList;
+import api.pojo.search.FoundMember;
 
 public class DataShared {
 
@@ -15,12 +12,15 @@ public class DataShared {
     private Board board;
     private Card card;
     private Checklist checklist;
-    private List<ListBoard> boardLists;
+    private Label label;
+    private BoardList boardList;
     private Object postObject;
+    private FoundMember foundMember;
 
     private String tempPathRequest = "";
 
-    public DataShared() {}
+    public DataShared() {
+    }
 
     public static DataShared getInstance() {
         return dataShared;
@@ -68,5 +68,29 @@ public class DataShared {
 
     public void setPostObject(Object postObject) {
         this.postObject = postObject;
+    }
+
+    public Label getLabel() {
+        return label;
+    }
+
+    public void setLabel(Label label) {
+        this.label = label;
+    }
+
+    public BoardList getBoardList() {
+        return boardList;
+    }
+
+    public void setBoardList(BoardList boardList) {
+        this.boardList = boardList;
+    }
+
+    public FoundMember getFoundMember() {
+        return foundMember;
+    }
+
+    public void setFoundMember(FoundMember foundMember) {
+        this.foundMember = foundMember;
     }
 }

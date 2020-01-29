@@ -5,7 +5,6 @@ import api.pojo.custom_fields_body.CustomFieldBody;
 import api.pojo.custom_fields_body.Option;
 import api.pojo.custom_fields_body.Value;
 import io.cucumber.java.en.Given;
-import io.restassured.mapper.ObjectMapperType;
 
 import java.util.Arrays;
 

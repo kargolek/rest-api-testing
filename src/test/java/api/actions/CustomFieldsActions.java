@@ -1,6 +1,5 @@
 package api.actions;
 
-import api.cucumber_test.DataShared;
 import api.pojo.custom_fields_body.CustomFieldBody;
 import api.pojo.custom_fields_body.Option;
 import api.pojo.custom_fields_body.Value;

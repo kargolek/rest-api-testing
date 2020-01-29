@@ -1,11 +1,8 @@
 package api.cucumber_test;
 
 import api.actions.BoardActions;
-import api.actions.CardActions;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
-
-import static io.restassured.RestAssured.given;
 
 public class BoardsSteps {
 
@@ -42,4 +39,13 @@ public class BoardsSteps {
         String idVotingBoardPlugin = "55a5d917446f517774210013";
         StepsDef.request.queryParam("idPlugin", idVotingBoardPlugin);
     }
+
+    @Given("Set base path found member id")
+    public void setFoundMemberIdBasePath() {
+        dataShared.addPathRequest("/" + dataShared.getFoundMember().getId());
+    }
+
+
+
+
 }
