@@ -10,8 +10,8 @@ import io.restassured.RestAssured;
         monochrome = true,
         features = {"src/test/resources"},
         glue = {"api.cucumber_test"},
-        plugin = {"pretty", "html: cucumber-html-reports",
-                "json: cucumber-html-reports/cucumber.json"},
+        plugin = {"pretty", "html:cucumber-html-reports",
+                "json:cucumber-html-reports/cucumber.json"},
         dryRun = false,
         strict = true)
 public class CucumberRunner extends AbstractTestNGCucumberTests {
