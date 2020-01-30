@@ -2,6 +2,7 @@ package api.cucumber_test;
 
 import api.actions.BoardActions;
 import api.pojo.board.Board;
+import api.pojo.board.BoardCreate;
 import api.pojo.membership.Membership;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
@@ -29,6 +30,14 @@ public class BoardsSteps {
     @Given("Create one board name")
     public void createBoard() {
         dataShared.setBoard(boardActions.createBoard());
+    }
+
+    //TODO Implement correct method
+    @Given("Create one board name test")
+    public void createBoardTest() {
+        BoardCreate boardCreate = new BoardCreate();
+        boardCreate.setName("new name");
+        dataShared.setBoard(boardActions.createBoard(boardCreate));
     }
 
     @Given("Set base path board id")

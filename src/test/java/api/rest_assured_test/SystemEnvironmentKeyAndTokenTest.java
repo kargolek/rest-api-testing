@@ -1,6 +1,10 @@
 package api.rest_assured_test;
 
+import api.pojo.custom_fields_body.Option;
 import org.testng.annotations.Test;
+
+import java.util.Objects;
+import java.util.Optional;
 
 import static org.testng.Assert.assertTrue;
 
@@ -16,4 +20,5 @@ public class SystemEnvironmentKeyAndTokenTest {
     public void should_api_token() {
         assertTrue(System.getenv().get("trl_token").matches("^[a-zA-Z0-9]+$"));
     }
+
 }

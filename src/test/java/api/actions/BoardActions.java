@@ -1,6 +1,7 @@
 package api.actions;
 
 import api.pojo.board.Board;
+import api.pojo.board.BoardCreate;
 import api.pojo.board.MyPrefs;
 import api.pojo.lists.BoardList;
 import api.pojo.membership.Membership;
@@ -15,6 +16,7 @@ import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static io.restassured.RestAssured.given;
 
@@ -30,7 +32,6 @@ public class BoardActions {
         RestAssured.baseURI = "https://api.trello.com/1";
         RequestSpecification requestSpecification = given()
                 .contentType(ContentType.TEXT)
-                .queryParam("", "?")
                 .queryParam("name", RandomStringUtils.randomAlphabetic(10))
                 .queryParam("defaultLabels", "true")
                 .queryParam("defaultLists", "true")
@@ -46,7 +47,34 @@ public class BoardActions {
                 .queryParam("prefs_cardAging", "regular")
                 .queryParam("key", System.getenv("trl_key"))
                 .queryParam("token", System.getenv("trl_token"));
-        Response response = requestSpecification.request(Method.POST, "boards");
+        Response response = requestSpecification.request(Method.POST, "/boards/");
+        response.then().log().all();
+        return response.as(Board.class);
+    }
+
+    public Board createBoard(BoardCreate boardCreate) {
+        RestAssured.baseURI = "https://api.trello.com/1";
+        RequestSpecification requestSpecification = given()
+                .contentType(ContentType.TEXT)
+                .queryParam("name", boardCreate.getName())
+                .queryParam("defaultLabels", Optional.of(boardCreate.isDefaultLabel()).orElse(true))
+                .queryParam("defaultLists", Optional.of(boardCreate.isDefaultLists()).orElse(true))
+                .queryParam("desc", Optional.ofNullable(boardCreate.getDesc()).orElse(""))
+                .queryParam("idOrganization", Optional.ofNullable(boardCreate.getIdOrganization()).orElse(""))
+                .queryParam("idBoardSource", Optional.ofNullable(boardCreate.getIdBoardSource()).orElse(""))
+                .queryParam("keepFromSource",  Optional.ofNullable(boardCreate.getKeepFromSource()).orElse("none"))
+                .queryParam("powerUps", Optional.ofNullable(boardCreate.getPowerUps()).orElse("all"))
+                .queryParam("prefs_permissionLevel", Optional.ofNullable(boardCreate.getPrefs_permissionLevel()).orElse("private"))
+                .queryParam("prefs_voting", Optional.ofNullable(boardCreate.getPrefs_voting()).orElse("members"))
+                .queryParam("prefs_comments", Optional.ofNullable(boardCreate.getPrefs_comments()).orElse("members"))
+                .queryParam("prefs_invitations", Optional.ofNullable(boardCreate.getPrefs_invitations()).orElse("members"))
+                .queryParam("prefs_selfJoin", Optional.of(boardCreate.isPrefs_selfJoin()).orElse(true))
+                .queryParam("prefs_cardCovers", Optional.of(boardCreate.isPrefs_cardCovers()).orElse(true))
+                .queryParam("prefs_background", Optional.ofNullable(boardCreate.getPrefs_background()).orElse("blue"))
+                .queryParam("prefs_cardAging",  Optional.ofNullable(boardCreate.getPrefs_cardAging()).orElse("regular"))
+                .queryParam("key", System.getenv("trl_key"))
+                .queryParam("token", System.getenv("trl_token"));
+        Response response = requestSpecification.request(Method.POST, "/boards");
         response.then().log().all();
         return response.as(Board.class);
     }

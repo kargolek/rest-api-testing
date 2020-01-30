@@ -117,3 +117,45 @@ Feature: Trello put boards api
     And Content type should be 'application/json; charset=utf-8'
     And Status line should be 'HTTP/1.1 200 OK'
     And Response body key "showListGuide" is boolean "true"
+
+  @CreateBoard
+  Scenario: Update board by my pref show sidebar
+    Given Set base URI 'https://api.trello.com/1'
+    Given Set base path '/boards'
+    Given Set base path board id
+    Given Set base path '/myPrefs/showSidebar'
+    Given Set query parameter "value" and value "false"
+    Given Set key and token
+    When Send put request
+    Then Status code should be 200
+    And Content type should be 'application/json; charset=utf-8'
+    And Status line should be 'HTTP/1.1 200 OK'
+    And Response body key "showSidebar" is boolean "false"
+
+  @CreateBoard
+  Scenario: Update board by my pref show sidebar activity
+    Given Set base URI 'https://api.trello.com/1'
+    Given Set base path '/boards'
+    Given Set base path board id
+    Given Set base path '/myPrefs/showSidebarActivity'
+    Given Set query parameter "value" and value "false"
+    Given Set key and token
+    When Send put request
+    Then Status code should be 200
+    And Content type should be 'application/json; charset=utf-8'
+    And Status line should be 'HTTP/1.1 200 OK'
+    And Response body key "showSidebarActivity" is boolean "false"
+
+  @CreateBoard
+  Scenario: Update board by my pref show sidebar board actions
+    Given Set base URI 'https://api.trello.com/1'
+    Given Set base path '/boards'
+    Given Set base path board id
+    Given Set base path '/myPrefs/showSidebarMembers'
+    Given Set query parameter "value" and value "false"
+    Given Set key and token
+    When Send put request
+    Then Status code should be 200
+    And Content type should be 'application/json; charset=utf-8'
+    And Status line should be 'HTTP/1.1 200 OK'
+    And Response body key "showSidebarMembers" is boolean "false"
