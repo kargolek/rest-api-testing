@@ -3,7 +3,7 @@ package api.rest_assured_test;
 import api.actions.BoardActions;
 import api.actions.CardActions;
 import api.actions.ListActions;
-import api.pojo.Board;
+import api.pojo.board.Board;
 import api.pojo.Card;
 import api.pojo.lists.BoardList;
 import io.restassured.RestAssured;

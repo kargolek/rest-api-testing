@@ -1,8 +1,10 @@
 package api.cucumber_test;
 
 import api.pojo.*;
+import api.pojo.board.Board;
 import api.pojo.labels.Label;
 import api.pojo.lists.BoardList;
+import api.pojo.membership.Membership;
 import api.pojo.search.FoundMember;
 
 public class DataShared {
@@ -16,6 +18,7 @@ public class DataShared {
     private BoardList boardList;
     private Object postObject;
     private FoundMember foundMember;
+    private Membership membership;
 
     private String tempPathRequest = "";
 
@@ -92,5 +95,13 @@ public class DataShared {
 
     public void setFoundMember(FoundMember foundMember) {
         this.foundMember = foundMember;
+    }
+
+    public Membership getMembership() {
+        return membership;
+    }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
     }
 }

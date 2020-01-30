@@ -62,7 +62,7 @@ public class StepsDef {
     }
 
     @Given("Set request json body")
-    public void setRequestBodyJson(){
+    public void setRequestBodyJson() {
         request.body(DataShared.getInstance().getPostObject(), ObjectMapperType.JACKSON_2);
     }
 
@@ -143,5 +143,11 @@ public class StepsDef {
     public void validateResponseBodyKeyIsEmpty(String key) {
         response.then().body(key, empty());
     }
+
+    @Then("Response body key {string} is boolean {string}")
+    public void validateResponseBodyIsNotNull(String key, String value) {
+        response.then().body(key, is(Boolean.parseBoolean(value)));
+    }
+
 
 }

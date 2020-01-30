@@ -3,5 +3,5 @@
 build
 out
 *Test Results*
-cucumber-html-reports
+*cucumber-html-reports*
 target

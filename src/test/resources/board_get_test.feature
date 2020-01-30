@@ -234,9 +234,6 @@ Feature: Trello get boards api features
     And Response body key "author" has item "Trello Inc"
     And Response body key 'name' has item 'Butler'
 
-    #PUT
-
-
   #POST
   @CreateBoard
   Scenario: Enable voting plugin on board
