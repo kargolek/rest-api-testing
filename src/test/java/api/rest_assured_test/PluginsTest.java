@@ -14,7 +14,6 @@ public class PluginsTest {
         System.out.println("ADD URI");
         RestAssured.baseURI = "https://api.trello.com/1";
     }
-    //TODO Implement test scenario
     //@formatter:off
     @Test(groups = "set_baseURI", enabled = false)
     public void get_all_plugins() {

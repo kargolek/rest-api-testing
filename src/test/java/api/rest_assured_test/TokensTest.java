@@ -17,13 +17,14 @@ public class TokensTest {
         RestAssured.baseURI = "https://api.trello.com/1";
     }
 
+    //@formatter:off
     @Test
     public void get_bad_token() {
         given()
                 .queryParam("key", System.getenv("trl_key"))
-                .when()
+        .when()
                 .get(String.format("tokens/%s", badToken))
-                .then()
+        .then()
                 .statusCode(404)
                 .contentType("text/plain; charset=utf-8")
                 .body(is("token not found"));
@@ -33,12 +34,13 @@ public class TokensTest {
     public void get_correct_token() {
         given()
                 .queryParam("key", System.getenv("trl_key"))
-                .when()
+        .when()
                 .get(String.format("tokens/%s", System.getenv("trl_token")))
-                .then()
+        .then()
                 .statusCode(200)
                 .contentType("application/json; charset=utf-8")
                 .body("identifier", is("Server Token"));
     }
+    //@formatter:on
 
 }
